@@ -23,19 +23,13 @@ export function WizardNavigation() {
           <div key={label} className="flex items-center gap-2">
             <div
               className={clsx(
-                "flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium",
+                "flex items-center text-center gap-2 px-3 py-1 rounded-full text-xs font-medium",
                 "border transition-colors",
-                isCompleted && "bg-primary text-white border-primary",
+                isCompleted && "bg-blue-500 text-white border-primary",
                 isActive && !isCompleted && "text-primary border-primary bg-primary/10",
                 !isActive && !isCompleted && "text-gray-500 border-gray-700"
               )}
             >
-              <span className={clsx(
-                "w-5 h-5 flex items-center justify-center rounded-full text-[10px] font-bold",
-                isCompleted ? "bg-white text-primary" : "bg-gray-600 text-white"
-              )}>
-                {isCompleted ? <Check size={12} /> : stepNumber}
-              </span>
               {label}
             </div>
 

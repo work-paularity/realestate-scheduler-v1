@@ -3,6 +3,7 @@ import { useWizardStore } from "@/store/wizardStore"
 import { simulateAsync } from "@/lib/fakeApi"
 import { toast } from "sonner"
 import { useState } from "react"
+import { Layers, Zap, Clock } from "lucide-react"
 
 export function Step4Review() {
   const { data, prevStep, reset } = useWizardStore()
@@ -11,7 +12,7 @@ export function Step4Review() {
   const handleConfirm = async () => {
     try {
       setLoading(true)
-      await simulateAsync(true, 2000, 0.1) // 2s delay, 10% fail
+      await simulateAsync(true, 2000, 0.1)
       toast.success("Automation rule created successfully.")
       reset()
     } catch (err) {
@@ -30,14 +31,46 @@ export function Step4Review() {
     }
   }
 
+  const SummaryItem = ({
+    icon: Icon,
+    label,
+    value,
+  }: {
+    icon: React.ElementType
+    label: string
+    value: string
+  }) => (
+    <div className="flex items-start space-x-3">
+      <div className="bg-cyan-950 text-white rounded-full p-2">
+        <Icon size={18} />
+      </div>
+      <div className="flex-1">
+        <div className="text-sm text-muted-foreground">{label}</div>
+        <div className="text-base font-medium">{value}</div>
+      </div>
+    </div>
+  )
+
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       <h2 className="text-xl font-semibold mb-2">Step 4: Review & Confirm</h2>
 
-      <div className="border p-4 rounded-md space-y-2 text-sm bg-muted/30">
-        <div><strong>Platforms:</strong> {data.platforms.join(", ")}</div>
-        <div><strong>Trigger:</strong> {data.trigger}</div>
-        <div><strong>Schedule:</strong> {getLabel(data.schedule)}</div>
+      <div className="bg-muted/30 border border-border rounded-lg p-6 space-y-4 shadow-sm">
+        <SummaryItem
+          icon={Layers}
+          label="Platforms"
+          value={data.platforms.join(", ")}
+        />
+        <SummaryItem
+          icon={Zap}
+          label="Trigger"
+          value={data.trigger}
+        />
+        <SummaryItem
+          icon={Clock}
+          label="Schedule"
+          value={getLabel(data.schedule)}
+        />
       </div>
 
       <div className="pt-4 flex justify-between">
