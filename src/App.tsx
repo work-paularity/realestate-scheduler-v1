@@ -1,17 +1,22 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { Button } from './components/ui/button'
+import { useWizardStore } from "@/store/wizardStore"
+import { WizardNavigation } from "./components/WizardNavigation"
+import { Step1Platforms } from "./components/Step1Platforms"
+import { Step2Trigger } from "./components/Step2Trigger"
+import { Step3Schedule } from "./components/Step3Schedule"
+import { Step4Review } from "./components/Step4Review"
 
 function App() {
-  const [count, setCount] = useState(0)
+  const step = useWizardStore((s) => s.step)
 
   return (
-    <div className="flex min-h-svh flex-col items-center justify-center">
-      <Button>Click me</Button>
-    </div>
-
+    <main className="max-w-xl mx-auto p-6">
+      <h1 className="text-2xl font-bold mb-4">Automation Wizard</h1>
+      <WizardNavigation />
+      {step === 1 && <Step1Platforms />}
+      {step === 2 && <Step2Trigger />}
+      {step === 3 && <Step3Schedule />}
+      {step === 4 && <Step4Review />}
+    </main>
   )
 }
 
