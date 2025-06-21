@@ -1,6 +1,6 @@
 import { useWizardStore } from "@/store/wizardStore"
 import clsx from "clsx"
-import { Check } from "lucide-react"
+import { ArrowLeft, ChevronRight } from "lucide-react"
 
 const steps = [
   "Choose Platforms",
@@ -9,7 +9,7 @@ const steps = [
   "Review & Confirm",
 ]
 
-export function WizardNavigation() {
+export const WizardNavigation = () => {
   const current = useWizardStore((s) => s.step)
 
   return (
@@ -34,7 +34,7 @@ export function WizardNavigation() {
             </div>
 
             {index < steps.length - 1 && (
-              <div className="text-gray-600 text-sm opacity-60">→</div>
+              <div className="text-gray-600 text-sm opacity-60"><ChevronRight /></div>
             )}
           </div>
         )
